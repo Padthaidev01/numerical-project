@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project Numerical API",
+    "version": "1.0.0",
+    "description": "API สำหรับคำนวณระเบียบวิธีเชิงตัวเลข"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "Development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Root of Equation",
+      "description": "API สำหรับการหารากของสมการ"
+    }
+  ],
+  "paths": {
+    "/api/calculate/bisection": {
+      "post": {
+        "tags": ["Root of Equation"],
+        "summary": "คำนวณหารากของสมการด้วย Bisection Method",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expr": { "type": "string", "example": "x**3 - x - 2" },
+                  "xl": { "type": "number", "example": 1 },
+                  "xr": { "type": "number", "example": 2 },
+                  "tol": { "type": "number", "example": 0.000001 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "ผลการคำนวณสำเร็จ" },
+          "400": { "description": "ข้อมูลที่ส่งมาไม่ถูกต้อง หรือคำนวณไม่ได้" }
+        }
+      }
+    },
+    "/api/calculate/falsePosition": {
+      "post": {
+        "tags": ["Root of Equation"],
+        "summary": "คำนวณหารากของสมการด้วย False Position Method",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expr": { "type": "string", "example": "x**3 - x - 2" },
+                  "xl": { "type": "number", "example": 1 },
+                  "xr": { "type": "number", "example": 2 },
+                  "tol": { "type": "number", "example": 0.000001 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "ผลการคำนวณสำเร็จ" },
+          "400": { "description": "ข้อมูลที่ส่งมาไม่ถูกต้อง หรือคำนวณไม่ได้" }
+        }
+      }
+    },
+    "/api/calculate/graphical": {
+      "post": {
+        "tags": ["Root of Equation"],
+        "summary": "สแกนหาช่วงของรากด้วย Graphical Method",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expr": { "type": "string", "example": "x**3 - x - 2" },
+                  "xl": { "type": "number", "example": -5 },
+                  "xr": { "type": "number", "example": 5 },
+                  "step": { "type": "number", "example": 0.5 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "ผลการคำนวณสำเร็จ" }
+        }
+      }
+    }
+  }
+}

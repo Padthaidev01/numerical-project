@@ -1,0 +1,16 @@
+FROM node:20-alpine
+WORKDIR /app
+
+# ติดตั้ง deps ก่อนเพื่อใช้ cache ให้เร็ว
+COPY package*.json ./
+RUN npm install
+
+# คัดลอกโค้ดทั้งหมด
+COPY . .
+
+# ช่วยให้ HMR เห็นการเปลี่ยนไฟล์ดีบน Windows/WSL
+ENV CHOKIDAR_USEPOLLING=true
+ENV WATCHPACK_POLLING=true
+
+EXPOSE 5173
+CMD ["npm","run","dev","--","--host","0.0.0.0"]
